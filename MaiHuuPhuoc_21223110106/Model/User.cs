@@ -4,19 +4,14 @@ namespace MaiHuuPhuoc_21223110106.Model
 {
     public class User
     {
-        [Key] // Đánh dấu khóa chính
         public int Id { get; set; }
-
-        [Required]
-        [MaxLength(100)]
-        public string Name { get; set; }
-
-        [Required]
-        [EmailAddress]
+        public string UserName { get; set; }
         public string Email { get; set; }
+        public int RoleId { get; set; }
+        //public Role Role { get; set; }
 
-        [Required]
-        [MinLength(6)]
-        public string Password { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
     }
 }
