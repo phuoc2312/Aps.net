@@ -188,16 +188,23 @@ async function deleteUser(userId) {
     if (!confirm('Are you sure you want to delete this user?')) {
         return;
     }
-    
+
     try {
         const response = await fetch(`${API_BASE_URL}/Users/${userId}`, {
             method: 'DELETE',
             ...addAuthHeader()
         });
-        
+
         if (!response.ok) {
             throw new Error('Failed to delete user');
         }
-        
+
+        alert('User deleted successfully');
+
         // Reload users
         loadUsers();
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        alert('An error occurred while deleting the user');
+    }
+}

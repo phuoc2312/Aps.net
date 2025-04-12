@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "MaiHuuPhuoc_21223110106",
-    "version": "1.0"
+    "title": "MaiHuuPhuoc_2122110106",
+    "version": "v1"
   },
   "paths": {
     "/api/Auth/login": {
@@ -1388,6 +1388,19 @@
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Nhập JWT token theo định dạng: Bearer {token}",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
 }
