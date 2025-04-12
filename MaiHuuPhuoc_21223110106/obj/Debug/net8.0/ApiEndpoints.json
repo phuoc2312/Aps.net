@@ -1,8 +1,34 @@
 [
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.CategoryController",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "MaiHuuPhuoc_21223110106.Model.LoginModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MaiHuuPhuoc_21223110106.Model.AuthResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.CategoriesController",
     "Method": "GetCategories",
-    "RelativePath": "api/Category",
+    "RelativePath": "api/Categories",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -20,9 +46,9 @@
     ]
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.CategoryController",
-    "Method": "CreateCategory",
-    "RelativePath": "api/Category",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.CategoriesController",
+    "Method": "PostCategory",
+    "RelativePath": "api/Categories",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -46,9 +72,9 @@
     ]
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.CategoryController",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.CategoriesController",
     "Method": "GetCategory",
-    "RelativePath": "api/Category/{id}",
+    "RelativePath": "api/Categories/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -72,9 +98,9 @@
     ]
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.CategoryController",
-    "Method": "UpdateCategory",
-    "RelativePath": "api/Category/{id}",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.CategoriesController",
+    "Method": "PutCategory",
+    "RelativePath": "api/Categories/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -93,9 +119,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.CategoryController",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.CategoriesController",
     "Method": "DeleteCategory",
-    "RelativePath": "api/Category/{id}",
+    "RelativePath": "api/Categories/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -109,85 +135,16 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.ProductController",
-    "Method": "CreateProduct",
-    "RelativePath": "api/Product",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "product",
-        "Type": "MaiHuuPhuoc_21223110106.Model.Product",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.ProductController",
-    "Method": "GetProduct",
-    "RelativePath": "api/Product/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.ProductController",
-    "Method": "UpdateProduct",
-    "RelativePath": "api/Product/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "product",
-        "Type": "MaiHuuPhuoc_21223110106.Model.Product",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.ProductController",
-    "Method": "DeleteProduct",
-    "RelativePath": "api/Product/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.RoleController",
-    "Method": "GetRoles",
-    "RelativePath": "api/Role",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.OrderDetailsController",
+    "Method": "GetOrderDetails",
+    "RelativePath": "api/OrderDetails",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[MaiHuuPhuoc_21223110106.Model.Role, MaiHuuPhuoc_21223110106, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[MaiHuuPhuoc_21223110106.Model.OrderDetail, MaiHuuPhuoc_21223110106, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -198,22 +155,22 @@
     ]
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.RoleController",
-    "Method": "CreateRole",
-    "RelativePath": "api/Role",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.OrderDetailsController",
+    "Method": "PostOrderDetail",
+    "RelativePath": "api/OrderDetails",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "role",
-        "Type": "MaiHuuPhuoc_21223110106.Model.Role",
+        "Name": "orderDetail",
+        "Type": "MaiHuuPhuoc_21223110106.Model.OrderDetail",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "MaiHuuPhuoc_21223110106.Model.Role",
+        "Type": "MaiHuuPhuoc_21223110106.Model.OrderDetail",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -224,9 +181,9 @@
     ]
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.RoleController",
-    "Method": "GetRole",
-    "RelativePath": "api/Role/{id}",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.OrderDetailsController",
+    "Method": "GetOrderDetail",
+    "RelativePath": "api/OrderDetails/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -239,7 +196,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "MaiHuuPhuoc_21223110106.Model.Role",
+        "Type": "MaiHuuPhuoc_21223110106.Model.OrderDetail",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -250,9 +207,9 @@
     ]
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.RoleController",
-    "Method": "UpdateRole",
-    "RelativePath": "api/Role/{id}",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.OrderDetailsController",
+    "Method": "PutOrderDetail",
+    "RelativePath": "api/OrderDetails/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -263,17 +220,17 @@
         "IsRequired": true
       },
       {
-        "Name": "role",
-        "Type": "MaiHuuPhuoc_21223110106.Model.Role",
+        "Name": "orderDetail",
+        "Type": "MaiHuuPhuoc_21223110106.Model.OrderDetail",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.RoleController",
-    "Method": "DeleteRole",
-    "RelativePath": "api/Role/{id}",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.OrderDetailsController",
+    "Method": "DeleteOrderDetail",
+    "RelativePath": "api/OrderDetails/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -287,9 +244,321 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.UserController",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.OrderDetailsController",
+    "Method": "GetOrderDetailsByOrder",
+    "RelativePath": "api/OrderDetails/Order/{orderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[MaiHuuPhuoc_21223110106.Model.OrderDetail, MaiHuuPhuoc_21223110106, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.OrdersController",
+    "Method": "GetOrders",
+    "RelativePath": "api/Orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[MaiHuuPhuoc_21223110106.Model.Order, MaiHuuPhuoc_21223110106, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.OrdersController",
+    "Method": "PostOrder",
+    "RelativePath": "api/Orders",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "order",
+        "Type": "MaiHuuPhuoc_21223110106.Model.Order",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MaiHuuPhuoc_21223110106.Model.Order",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.OrdersController",
+    "Method": "GetOrder",
+    "RelativePath": "api/Orders/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MaiHuuPhuoc_21223110106.Model.Order",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.OrdersController",
+    "Method": "PutOrder",
+    "RelativePath": "api/Orders/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "order",
+        "Type": "MaiHuuPhuoc_21223110106.Model.Order",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.OrdersController",
+    "Method": "DeleteOrder",
+    "RelativePath": "api/Orders/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.OrdersController",
+    "Method": "GetOrdersByUser",
+    "RelativePath": "api/Orders/User/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[MaiHuuPhuoc_21223110106.Model.Order, MaiHuuPhuoc_21223110106, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.ProductsController",
+    "Method": "GetProducts",
+    "RelativePath": "api/Products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[MaiHuuPhuoc_21223110106.Model.Product, MaiHuuPhuoc_21223110106, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.ProductsController",
+    "Method": "PostProduct",
+    "RelativePath": "api/Products",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "product",
+        "Type": "MaiHuuPhuoc_21223110106.Model.Product",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MaiHuuPhuoc_21223110106.Model.Product",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.ProductsController",
+    "Method": "GetProduct",
+    "RelativePath": "api/Products/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MaiHuuPhuoc_21223110106.Model.Product",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.ProductsController",
+    "Method": "PutProduct",
+    "RelativePath": "api/Products/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "product",
+        "Type": "MaiHuuPhuoc_21223110106.Model.Product",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.ProductsController",
+    "Method": "DeleteProduct",
+    "RelativePath": "api/Products/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.ProductsController",
+    "Method": "GetProductsByCategory",
+    "RelativePath": "api/Products/Category/{categoryId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[MaiHuuPhuoc_21223110106.Model.Product, MaiHuuPhuoc_21223110106, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.ProductsController",
+    "Method": "UploadImage",
+    "RelativePath": "api/Products/Upload",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.UsersController",
     "Method": "GetUsers",
-    "RelativePath": "api/User",
+    "RelativePath": "api/Users",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -307,9 +576,9 @@
     ]
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.UserController",
-    "Method": "CreateUser",
-    "RelativePath": "api/User",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.UsersController",
+    "Method": "PostUser",
+    "RelativePath": "api/Users",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -333,9 +602,9 @@
     ]
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.UserController",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.UsersController",
     "Method": "GetUser",
-    "RelativePath": "api/User/{id}",
+    "RelativePath": "api/Users/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -359,9 +628,9 @@
     ]
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.UserController",
-    "Method": "UpdateUser",
-    "RelativePath": "api/User/{id}",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.UsersController",
+    "Method": "PutUser",
+    "RelativePath": "api/Users/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -380,9 +649,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.UserController",
+    "ContainingType": "MaiHuuPhuoc_21223110106.Controllers.UsersController",
     "Method": "DeleteUser",
-    "RelativePath": "api/User/{id}",
+    "RelativePath": "api/Users/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
