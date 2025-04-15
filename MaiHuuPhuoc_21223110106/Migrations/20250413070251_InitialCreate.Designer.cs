@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaiHuuPhuoc_21223110106.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250412065517_InitialCreate")]
+    [Migration("20250413070251_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -44,26 +44,6 @@ namespace MaiHuuPhuoc_21223110106.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Electronic devices and gadgets",
-                            Name = "Electronics"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Apparel and fashion items",
-                            Name = "Clothing"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Books and publications",
-                            Name = "Books"
-                        });
                 });
 
             modelBuilder.Entity("MaiHuuPhuoc_21223110106.Model.Order", b =>
@@ -157,35 +137,6 @@ namespace MaiHuuPhuoc_21223110106.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            Description = "Latest smartphone with advanced features",
-                            ImageUrl = "/images/smartphone.jpg",
-                            Name = "Smartphone",
-                            Price = 999.99m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 2,
-                            Description = "Comfortable cotton t-shirt",
-                            ImageUrl = "/images/tshirt.jpg",
-                            Name = "T-Shirt",
-                            Price = 19.99m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 3,
-                            Description = "Learn programming with this comprehensive guide",
-                            ImageUrl = "/images/book.jpg",
-                            Name = "Programming Book",
-                            Price = 49.99m
-                        });
                 });
 
             modelBuilder.Entity("MaiHuuPhuoc_21223110106.Model.User", b =>
@@ -225,17 +176,6 @@ namespace MaiHuuPhuoc_21223110106.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "admin@example.com",
-                            FullName = "Admin User",
-                            Password = "admin123",
-                            Phone = "1234567890",
-                            Username = "admin"
-                        });
                 });
 
             modelBuilder.Entity("MaiHuuPhuoc_21223110106.Model.Order", b =>

@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace MaiHuuPhuoc_21223110106.Migrations
 {
     /// <inheritdoc />
@@ -140,18 +138,6 @@ namespace MaiHuuPhuoc_21223110106.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "Description", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Electronic devices and gadgets", "Electronics" },
-                    { 2, "Apparel and fashion items", "Clothing" },
-                    { 3, "Books and publications", "Books" }
-                });
-
-            
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_OrderId",

@@ -148,7 +148,6 @@ D:\aps.net\MaiHuuPhuoc_21223110106\MaiHuuPhuoc_21223110106\obj\Debug\net8.0\MaiH
 D:\aps.net\MaiHuuPhuoc_21223110106\MaiHuuPhuoc_21223110106\obj\Debug\net8.0\MaiHuuPhuoc_21223110106.genruntimeconfig.cache
 D:\aps.net\MaiHuuPhuoc_21223110106\MaiHuuPhuoc_21223110106\obj\Debug\net8.0\ref\MaiHuuPhuoc_21223110106.dll
 D:\aps.net\MaiHuuPhuoc_21223110106\MaiHuuPhuoc_21223110106\bin\Debug\net8.0\BCrypt.Net-Next.dll
-D:\aps.net\MaiHuuPhuoc_21223110106\MaiHuuPhuoc_21223110106\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\ASUS\Desktop\Aps.net-master\MaiHuuPhuoc_21223110106\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\ASUS\Desktop\Aps.net-master\MaiHuuPhuoc_21223110106\bin\Debug\net8.0\appsettings.json
 C:\Users\ASUS\Desktop\Aps.net-master\MaiHuuPhuoc_21223110106\bin\Debug\net8.0\MaiHuuPhuoc_21223110106.staticwebassets.endpoints.json
@@ -299,3 +298,4 @@ C:\Users\ASUS\Desktop\Aps.net-master\MaiHuuPhuoc_21223110106\obj\Debug\net8.0\re
 C:\Users\ASUS\Desktop\Aps.net-master\MaiHuuPhuoc_21223110106\obj\Debug\net8.0\MaiHuuPhuoc_21223110106.pdb
 C:\Users\ASUS\Desktop\Aps.net-master\MaiHuuPhuoc_21223110106\obj\Debug\net8.0\MaiHuuPhuoc_21223110106.genruntimeconfig.cache
 C:\Users\ASUS\Desktop\Aps.net-master\MaiHuuPhuoc_21223110106\obj\Debug\net8.0\ref\MaiHuuPhuoc_21223110106.dll
+D:\aps.net\MaiHuuPhuoc_21223110106\MaiHuuPhuoc_21223110106\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

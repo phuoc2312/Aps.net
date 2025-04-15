@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using MaiHuuPhuoc_21223110106.Services;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -96,8 +97,6 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
 else
 {
@@ -107,11 +106,73 @@ else
 // Middleware chung
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
-app.UseStaticFiles();
+
+// Phục vụ file tĩnh từ thư mục Content (bao gồm cả User UI và Admin UI)
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Content")),
+    RequestPath = "/content"
+});
+
+// Đặt file mặc định (index.html hoặc login.html) khi truy cập thư mục Content (User UI)
+app.UseDefaultFiles(new DefaultFilesOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Content")),
+    RequestPath = "/content",
+    DefaultFileNames = new List<string> { "index.html"} // Ưu tiên index.html
+});
+
+// Đặt file mặc định (index.html) khi truy cập thư mục Content/admin (Admin UI)
+app.UseDefaultFiles(new DefaultFilesOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Content", "admin")),
+    RequestPath = "/content/admin",
+    DefaultFileNames = new List<string> { "index.html" }
+});
+
+app.UseStaticFiles(); // Đảm bảo các file tĩnh được phục vụ
+
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Middleware kiểm tra quyền truy cập Admin UI
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/content/admin"))
+    {
+        // Kiểm tra quyền admin (dựa trên JWT)
+        if (!context.User.Identity.IsAuthenticated || !context.User.IsInRole("Admin"))
+        {
+            // Nếu không có quyền admin, chuyển hướng về trang login của User UI
+            context.Response.Redirect("/content/login.html");
+            return;
+        }
+    }
+    await next();
+});
+
+// Chuyển hướng từ route gốc (/) đến trang User UI
+app.MapGet("/", async context =>
+{
+    context.Response.Redirect("/content/index.html", permanent: true);
+    await Task.CompletedTask;
+}).ExcludeFromDescription();
+
 app.MapControllers();
 
+// Đặt Swagger UI ở một route cụ thể
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "MaiHuuPhuoc_2122110106 v1");
+        c.RoutePrefix = "swagger"; // Đảm bảo Swagger UI chỉ xuất hiện tại /swagger
+    });
+}
 
 // Chạy ứng dụng
 app.Run();
