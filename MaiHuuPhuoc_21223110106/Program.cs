@@ -9,32 +9,28 @@ using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Lấy connection string từ appsettings.json
+// Lấy connection string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-// Kiểm tra chuỗi kết nối có bị null không
 if (string.IsNullOrEmpty(connectionString))
 {
     throw new InvalidOperationException("Connection string 'DefaultConnection' is not set in appsettings.json");
 }
 
-// Cấu hình DbContext sử dụng MySQL (Pomelo)
+// Cấu hình DbContext với MySQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-// Đăng ký Controller với JSON options để tránh lỗi circular reference
+// Cấu hình Controller
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 
-// Đăng ký Swagger
+// Cấu hình Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "MaiHuuPhuoc_2122110106", Version = "v1" });
-
-    // Định nghĩa Bearer Token
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -44,8 +40,6 @@ builder.Services.AddSwaggerGen(options =>
         In = ParameterLocation.Header,
         Description = "Nhập JWT token theo định dạng: Bearer {token}"
     });
-
-    // Gắn Bearer vào tất cả các endpoint có [Authorize]
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -65,9 +59,9 @@ builder.Services.AddSwaggerGen(options =>
 // Thêm CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", builder =>
+    options.AddPolicy("AllowFrontend", builder =>
     {
-        builder.AllowAnyOrigin()
+        builder.WithOrigins("https://localhost:7147", "http://localhost:5021")
                .AllowAnyMethod()
                .AllowAnyHeader();
     });
@@ -97,64 +91,72 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "MaiHuuPhuoc_2122110106 v1");
+        c.RoutePrefix = "swagger";
+    });
 }
 else
 {
     app.UseExceptionHandler("/error");
 }
 
-// Middleware chung
-app.UseHttpsRedirection();
-app.UseCors("AllowAll");
+// Middleware
+app.UseCors("AllowFrontend");
 
-// Phục vụ file tĩnh từ thư mục Content (bao gồm cả User UI và Admin UI)
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "Content")),
-    RequestPath = "/content"
-});
-
-// Đặt file mặc định (index.html hoặc login.html) khi truy cập thư mục Content (User UI)
-app.UseDefaultFiles(new DefaultFilesOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "Content")),
-    RequestPath = "/content",
-    DefaultFileNames = new List<string> { "index.html"} // Ưu tiên index.html
-});
-
-// Đặt file mặc định (index.html) khi truy cập thư mục Content/admin (Admin UI)
-app.UseDefaultFiles(new DefaultFilesOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "Content", "admin")),
-    RequestPath = "/content/admin",
-    DefaultFileNames = new List<string> { "index.html" }
-});
-
-app.UseStaticFiles(); // Đảm bảo các file tĩnh được phục vụ
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-// Middleware kiểm tra quyền truy cập Admin UI
+// Xử lý yêu cầu OPTIONS cho preflight
 app.Use(async (context, next) =>
 {
-    if (context.Request.Path.StartsWithSegments("/content/admin"))
+    if (context.Request.Method == "OPTIONS")
     {
-        // Kiểm tra quyền admin (dựa trên JWT)
-        if (!context.User.Identity.IsAuthenticated || !context.User.IsInRole("Admin"))
-        {
-            // Nếu không có quyền admin, chuyển hướng về trang login của User UI
-            context.Response.Redirect("/content/login.html");
-            return;
-        }
+        context.Response.StatusCode = 204;
+        context.Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:7147");
+        context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+        context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,Authorization");
+        return;
     }
     await next();
 });
 
-// Chuyển hướng từ route gốc (/) đến trang User UI
+// Chỉ chuyển hướng HTTPS cho non-API routes
+app.Use(async (context, next) =>
+{
+    if (!context.Request.IsHttps && !context.Request.Path.StartsWithSegments("/api"))
+    {
+        var httpsPort = builder.Configuration["Kestrel:Endpoints:Https:Url"]?.Split(':').Last() ?? "7147";
+        context.Response.Redirect($"https://{context.Request.Host.Host}:{httpsPort}{context.Request.Path}{context.Request.QueryString}", permanent: false);
+        return;
+    }
+    await next();
+});
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Content")),
+    RequestPath = "/content"
+});
+
+app.UseDefaultFiles(new DefaultFilesOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Content")),
+    RequestPath = "/content",
+    DefaultFileNames = new List<string> { "index.html" }
+});
+
+app.UseDefaultFiles(new DefaultFilesOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Content", "admin")),
+    RequestPath = "/content/admin",
+    DefaultFileNames = new List<string> { "index.html" }
+});
+
+app.UseStaticFiles();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapGet("/", async context =>
 {
     context.Response.Redirect("/content/index.html", permanent: true);
@@ -163,16 +165,4 @@ app.MapGet("/", async context =>
 
 app.MapControllers();
 
-// Đặt Swagger UI ở một route cụ thể
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "MaiHuuPhuoc_2122110106 v1");
-        c.RoutePrefix = "swagger"; // Đảm bảo Swagger UI chỉ xuất hiện tại /swagger
-    });
-}
-
-// Chạy ứng dụng
 app.Run();

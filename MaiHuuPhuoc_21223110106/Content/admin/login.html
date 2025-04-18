@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - E-Commerce Store</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2 class="text-center mb-4">Admin Login</h2>
+        <form id="loginForm">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <div id="errorMessage" class="text-danger mb-3" style="display: none;"></div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+    </div>
+
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Hàm giải mã JWT để lấy claims
+        function parseJwt(token) {
+            try {
+                const base64Url = token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+                return JSON.parse(jsonPayload);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Giải mã token để kiểm tra vai trò
+                    const payload = parseJwt(result.token);
+                    const roles = payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+                    const isAdmin = Array.isArray(roles) ? roles.includes('Admin') : roles === 'Admin';
+
+                    if (isAdmin) {
+                        localStorage.setItem('token', result.token);
+                        localStorage.setItem('userId', result.userId);
+                        localStorage.setItem('username', result.username);
+                        window.location.href = '/content/admin/index.html';
+                    } else {
+                        errorMessage.textContent = 'Only Admins can log in here.';
+                        errorMessage.style.display = 'block';
+                    }
+                } else {
+                    errorMessage.textContent = result.message || 'Login failed.';
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                errorMessage.textContent = 'An error occurred. Please try again.';
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

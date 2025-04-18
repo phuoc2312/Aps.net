@@ -1,4 +1,4 @@
-// Define constants for token and user keys
+﻿// Define constants for token and user keys
 const TOKEN_KEY = "token"
 const USER_KEY = "user"
 
@@ -115,3 +115,14 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutBtn.addEventListener("click", logout)
   }
 })
+async function checkAuth() {
+    return true; // Luôn cho phép truy cập
+}
+
+async function fetchData(url, options = {}) {
+    const response = await fetch(`http://localhost:5021${url}`, { ...options, headers: { 'Content-Type': 'application/json' } });
+    if (!response.ok) {
+        throw new Error(`Request failed: ${response.statusText}`);
+    }
+    return response.json();
+}

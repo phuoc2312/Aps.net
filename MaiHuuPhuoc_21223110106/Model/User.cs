@@ -30,7 +30,10 @@ namespace MaiHuuPhuoc_21223110106.Model
         [StringLength(20)]
         public string? Phone { get; set; }
 
+
         [JsonIgnore]
         public virtual ICollection<Order>? Orders { get; set; }
+
+        public bool IsAdmin { get; set; } = false;
     }
 }

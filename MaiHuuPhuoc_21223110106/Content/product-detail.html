@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Detail - EcoShop</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/content/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/content/css/styles.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/content/index.html">
                 <i class="bi bi-leaf me-2"></i>EcoShop
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="/content/index.html">
                             <i class="bi bi-house-door me-1"></i>Home
                         </a>
                     </li>
@@ -28,21 +28,17 @@
                         <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-grid me-1"></i>Categories
                         </a>
-                        <ul class="dropdown-menu" id="categoriesList">
-                            <!-- Categories will be loaded here -->
-                        </ul>
+                        <ul class="dropdown-menu" id="categoriesList"></ul>
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <a href="cart.html" class="btn btn-outline-light me-2 position-relative">
+                    <a href="/content/cart.html" class="btn btn-outline-light me-2 position-relative">
                         <i class="bi bi-cart3"></i>
-                        <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            0
-                        </span>
+                        <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
                     </a>
                     <div id="userSection">
-                        <a href="login.html" class="btn btn-outline-light me-2">Login</a>
-                        <a href="register.html" class="btn btn-light">Register</a>
+                        <a href="/content/login.html" class="btn btn-outline-light me-2">Login</a>
+                        <a href="/content/register.html" class="btn btn-light">Register</a>
                     </div>
                 </div>
             </div>
@@ -52,27 +48,20 @@
     <div class="container mt-4">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="/content/index.html">Home</a></li>
                 <li class="breadcrumb-item"><a href="#" id="categoryLink">Category</a></li>
-                <li class="breadcrumb-item active" aria-current="page" id="productName">Product</li>
+                <li class="breadcrumb-item active" id="productName">Product</li>
             </ol>
         </nav>
 
-        <div id="productDetail" class="fade-in">
-            <div class="text-center py-5">
-                <div class="spinner-border spinner-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        </div>
+        <div id="productDetail"></div>
 
-        <!-- Product template that will be populated by JavaScript -->
         <div id="productTemplate" style="display: none;">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="row g-0">
                     <div class="col-md-6">
                         <div class="p-3 text-center">
-                            <img src="/placeholder.svg" alt="" class="img-fluid rounded product-image" style="max-height: 400px; object-fit: contain;">
+                            <img src="/content/images/default.jpg" alt="" class="img-fluid rounded product-image" style="max-height: 400px; object-fit: contain;">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -84,7 +73,7 @@
                             <p class="card-text product-description mb-4"></p>
                             <div class="d-flex align-items-center mb-4">
                                 <h3 class="product-price text-primary mb-0"></h3>
-                                <span class="ms-2 badge bg-success product-stock"></span>
+                                <span class="ms-2 badge bg-success product-stock">In Stock</span>
                             </div>
                             <div class="d-flex align-items-center mb-4">
                                 <div class="input-group me-3" style="width: 130px;">
@@ -123,7 +112,6 @@
         <div class="mt-5">
             <h3 class="mb-4">Related Products</h3>
             <div class="row g-4" id="relatedProducts">
-                <!-- Related products will be loaded here -->
                 <div class="col-12 text-center">
                     <div class="spinner-border spinner-primary" role="status">
                         <span class="visually-hidden">Loading...</span>
@@ -149,8 +137,8 @@
                 <div class="col-lg-2 col-md-6">
                     <h5 class="mb-3">Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="index.html">Home</a></li>
-                        <li class="mb-2"><a href="#">Products</a></li>
+                        <li class="mb-2"><a href="/content/index.html">Home</a></li>
+                        <li class="mb-2"><a href="/content/products.html">Products</a></li>
                         <li class="mb-2"><a href="#">About Us</a></li>
                         <li class="mb-2"><a href="#">Contact</a></li>
                     </ul>
@@ -168,7 +156,7 @@
                     <h5 class="mb-3">Contact Us</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2"><i class="bi bi-geo-alt me-2"></i> 123 Commerce St, City, State 12345</li>
-                        <li class="mb-2"><i class="bi bi-envelope me-2"></i> info@ecoshop.com</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i> <a href="mailto:support@ecoshop.com">support@ecoshop.com</a></li>
                         <li class="mb-2"><i class="bi bi-telephone me-2"></i> (123) 456-7890</li>
                         <li class="mb-2"><i class="bi bi-clock me-2"></i> Mon-Fri: 9AM-6PM</li>
                     </ul>
@@ -181,17 +169,145 @@
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <p class="small mb-0">
-                        <a href="#">Terms of Service</a> |
-                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
                     </p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/product-detail.js"></script>
+    <script src="/content/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Cập nhật số lượng giỏ hàng
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // Cập nhật giao diện người dùng
+        function updateUserSection() {
+            const token = localStorage.getItem('token');
+            const userSection = document.getElementById('userSection');
+            if (token) {
+                userSection.innerHTML = `
+                        <span class="navbar-text me-2">Welcome, ${localStorage.getItem('username') || 'User'}</span>
+                        <button class="btn btn-outline-light" onclick="logout()">Logout</button>
+                    `;
+            }
+        }
+
+        // Đăng xuất
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('username');
+            window.location.href = '/content/index.html';
+        }
+
+        // Lấy danh mục
+        async function loadCategories() {
+            try {
+                const response = await fetch('/api/categories');
+                if (!response.ok) throw new Error('Failed to fetch categories');
+                const categories = await response.json();
+                const categoriesList = document.getElementById('categoriesList');
+                categoriesList.innerHTML = categories.map(cat => `
+                        <li><a class="dropdown-item" href="/content/products.html?categoryId=${cat.id}">${cat.name}</a></li>
+                    `).join('');
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        }
+
+        // Lấy chi tiết sản phẩm
+        async function loadProduct() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('productId');
+            if (!productId) {
+                document.getElementById('productDetail').innerHTML = '<p>Product not found</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/products/${productId}`);
+                if (!response.ok) throw new Error('Failed to fetch product');
+                const product = await response.json();
+                const template = document.getElementById('productTemplate').children[0].cloneNode(true);
+                template.querySelector('.product-image').src = product.imageUrl || '/content/images/default.jpg';
+                template.querySelector('.product-title').textContent = product.name;
+                template.querySelector('.product-category').textContent = product.category?.name || 'N/A';
+                template.querySelector('.product-description').textContent = product.description || 'No description available';
+                template.querySelector('.product-price').textContent = `$${product.price.toFixed(2)}`;
+                document.getElementById('productDetail').innerHTML = '';
+                document.getElementById('productDetail').appendChild(template);
+                document.getElementById('productName').textContent = product.name;
+                document.getElementById('categoryLink').textContent = product.category?.name || 'Category';
+                document.getElementById('categoryLink').href = `/content/products.html?categoryId=${product.categoryId}`;
+
+                // Xử lý số lượng
+                const quantityInput = template.querySelector('#quantity');
+                template.querySelector('#increaseQuantity').addEventListener('click', () => {
+                    quantityInput.value = parseInt(quantityInput.value) + 1;
+                });
+                template.querySelector('#decreaseQuantity').addEventListener('click', () => {
+                    if (quantityInput.value > 1) quantityInput.value = parseInt(quantityInput.value) - 1;
+                });
+
+                // Thêm vào giỏ hàng
+                template.querySelector('#addToCartBtn').addEventListener('click', () => {
+                    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                    const quantity = parseInt(quantityInput.value);
+                    const existingItem = cart.find(item => item.id === product.id);
+                    if (existingItem) {
+                        existingItem.quantity += quantity;
+                    } else {
+                        cart.push({
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            imageUrl: product.imageUrl,
+                            quantity
+                        });
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
+                    alert('Added to cart');
+                });
+
+                // Lấy sản phẩm liên quan
+                const relatedResponse = await fetch(`/api/products/category/${product.categoryId}`);
+                if (relatedResponse.ok) {
+                    const relatedProducts = await relatedResponse.json();
+                    const relatedList = document.getElementById('relatedProducts');
+                    relatedList.innerHTML = relatedProducts
+                        .filter(p => p.id !== product.id)
+                        .slice(0, 4)
+                        .map(prod => `
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card border-0 shadow-sm">
+                                        <img src="${prod.imageUrl || '/content/images/default.jpg'}" class="card-img-top" alt="${prod.name}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${prod.name}</h5>
+                                            <p class="card-text text-primary">$${prod.price.toFixed(2)}</p>
+                                            <a href="/content/product-detail.html?productId=${prod.id}" class="btn btn-primary btn-sm">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('');
+                }
+            } catch (error) {
+                console.error('Error fetching product:', error);
+                document.getElementById('productDetail').innerHTML = '<p>Error loading product</p>';
+            }
+        }
+
+        window.onload = () => {
+            updateCartCount();
+            updateUserSection();
+            loadCategories();
+            loadProduct();
+        };
+    </script>
 </body>
 </html>

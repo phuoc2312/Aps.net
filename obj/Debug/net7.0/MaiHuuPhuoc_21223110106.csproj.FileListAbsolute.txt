@@ -1,0 +1,8 @@
+D:\aps.net\MaiHuuPhuoc_21223110106\obj\Debug\net7.0\MaiHuuPhuoc_21223110106.csproj.AssemblyReference.cache
+D:\aps.net\MaiHuuPhuoc_21223110106\obj\Debug\net7.0\MaiHuuPhuoc_21223110106.GeneratedMSBuildEditorConfig.editorconfig
+D:\aps.net\MaiHuuPhuoc_21223110106\obj\Debug\net7.0\MaiHuuPhuoc_21223110106.AssemblyInfoInputs.cache
+D:\aps.net\MaiHuuPhuoc_21223110106\obj\Debug\net7.0\MaiHuuPhuoc_21223110106.AssemblyInfo.cs
+D:\aps.net\MaiHuuPhuoc_21223110106\obj\Debug\net7.0\MaiHuuPhuoc_21223110106.csproj.CoreCompileInputs.cache
+D:\aps.net\MaiHuuPhuoc_21223110106\obj\Debug\net7.0\MaiHuuPhuoc_21223110106.MvcApplicationPartsAssemblyInfo.cs
+D:\aps.net\MaiHuuPhuoc_21223110106\obj\Debug\net7.0\MaiHuuPhuoc_21223110106.MvcApplicationPartsAssemblyInfo.cache
+D:\aps.net\MaiHuuPhuoc_21223110106\obj\Debug\net7.0\MaiHuuPhuoc_21223110106.sourcelink.json

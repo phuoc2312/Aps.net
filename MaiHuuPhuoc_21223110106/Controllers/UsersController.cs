@@ -1,48 +1,54 @@
+﻿// MaiHuuPhuoc_21223110106/Controllers/UsersController.cs
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MaiHuuPhuoc_21223110106.Data;
 using MaiHuuPhuoc_21223110106.Model;
-using Microsoft.AspNetCore.Authorization;
 
 namespace MaiHuuPhuoc_21223110106.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController(ApplicationDbContext context) : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-        public UsersController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        // GET: api/Users
         [HttpGet]
-        [Authorize]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<object>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await context.Users
+                .Select(u => new
+                {
+                    u.Id,
+                    u.Username,
+                    u.Email,
+                    u.FullName,
+                    u.Address,
+                    u.Phone,
+                    u.IsAdmin
+                })
+                .ToListAsync();
         }
 
-        // GET: api/Users/5
         [HttpGet("{id}")]
-        [Authorize]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<object>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user;
+            var user = await context.Users.FindAsync(id);
+            return user == null
+                ? NotFound()
+                : new
+                {
+                    user.Id,
+                    user.Username,
+                    user.Email,
+                    user.FullName,
+                    user.Address,
+                    user.Phone,
+                    user.IsAdmin
+                };
         }
 
-        // PUT: api/Users/5
         [HttpPut("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.Id)
@@ -50,11 +56,21 @@ namespace MaiHuuPhuoc_21223110106.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            var existingUser = await context.Users.FindAsync(id);
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
+
+            existingUser.Email = user.Email;
+            existingUser.FullName = user.FullName;
+            existingUser.Address = user.Address;
+            existingUser.Phone = user.Phone;
+            existingUser.IsAdmin = user.IsAdmin;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -62,68 +78,52 @@ namespace MaiHuuPhuoc_21223110106.Controllers
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/Users
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<object>> PostUser(User user)
         {
-            // Check if username already exists
-            if (await _context.Users.AnyAsync(u => u.Username == user.Username))
+            if ((await context.Users.CountAsync(u => u.Username == user.Username)) > 0)
             {
                 return BadRequest("Username already exists");
             }
 
-            // Hash the password before storing
-            user.Password = HashPassword(user.Password);
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            context.Users.Add(user);
+            await context.SaveChangesAsync();
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            // Don't return the password in the response
-            var userToReturn = new
+            return CreatedAtAction("GetUser", new { id = user.Id }, new
             {
                 user.Id,
                 user.Username,
                 user.Email,
-                user.FullName
-            };
-
-            return CreatedAtAction("GetUser", new { id = user.Id }, userToReturn);
+                user.FullName,
+                user.Address,
+                user.Phone,
+                user.IsAdmin
+            });
         }
 
-        // Helper method to hash passwords
-        private string HashPassword(string password)
-        {
-            return BCrypt.Net.BCrypt.HashPassword(password);
-        }
-        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
+            context.Users.Remove(user);
+            await context.SaveChangesAsync();
             return NoContent();
         }
 
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.Id == id);
-        }
+        private bool UserExists(int id) =>
+            context.Users.Any(e => e.Id == id);
     }
 }

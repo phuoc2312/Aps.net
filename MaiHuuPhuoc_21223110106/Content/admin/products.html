@@ -48,31 +48,38 @@
 
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Products</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                            Add New Product
-                        </button>
-                    </div>
+                <div id="accessDenied" style="display: none;">
+                    <h3>Access Denied</h3>
+                    <p>Only Admins can access this page.</p>
                 </div>
+                <div id="mainContent">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Products</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                                Add New Product
+                            </button>
+                        </div>
+                    </div>
 
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Price</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="productsList">
-                            <!-- Products will be loaded here -->
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsList"></tbody>
+                        </table>
+                                <!-- Products will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </main>
         </div>
@@ -107,8 +114,8 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="productImage" class="form-label">Image URL</label>
-                            <input type="text" class="form-control" id="productImage">
+                            <label for="productImage" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="productImage" accept=".jpg,.jpeg,.png,.gif">
                         </div>
                     </form>
                 </div>
@@ -150,8 +157,9 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="editProductImage" class="form-label">Image URL</label>
-                            <input type="text" class="form-control" id="editProductImage">
+                            <label for="editProductImage" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="editProductImage" accept=".jpg,.jpeg,.png,.gif">
+                            <img id="currentImage" src="" alt="Current Image" style="max-width: 100px; display: none; margin-top: 10px;">
                         </div>
                     </form>
                 </div>
